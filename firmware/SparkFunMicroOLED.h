@@ -177,6 +177,9 @@ public:
 	void flipVertical(bool flip);
 	void flipHorizontal(bool flip);
 
+	// Other functions
+	void textWrap(bool wrap);
+
 private:
 	uint8_t csPin, dcPin, rstPin;
 	uint8_t wrPin, rdPin, dPins[8];
@@ -186,6 +189,7 @@ private:
 	uint8_t foreColor,drawMode,fontWidth, fontHeight, fontType, fontStartChar, fontTotalChar, cursorX, cursorY;
 	uint16_t fontMapWidth;
 	static const unsigned char *fontsPointer[];
+	bool textWrapFlag = 1;
 
 	void setup(micro_oled_mode mode, uint8_t rst, uint8_t dc, uint8_t cs);
 

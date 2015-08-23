@@ -334,7 +334,7 @@ void MicroOLED::display(void) {
 
     Arduino's print overridden so that we can use uView.print().
 */
-size_t MicroOLED::write(uint8_t c) 
+size_t MicroOLED::write(uint8_t c)
 {
 	if (c == '\n') {
 		cursorY += fontHeight;
@@ -344,7 +344,7 @@ size_t MicroOLED::write(uint8_t c)
 	} else {
 		drawChar(cursorX, cursorY, c, foreColor, drawMode);
 		cursorX += fontWidth+1;
-		if ((cursorX > (LCDWIDTH - fontWidth))) {
+		if ((cursorX > (LCDWIDTH - fontWidth)) && textWrapFlag) {
 			cursorY += fontHeight;
 			cursorX = 0;
 		}
@@ -838,6 +838,14 @@ void MicroOLED::flipHorizontal(bool flip) {
 	else {
 		command(SEGREMAP | 0x1);
 	}
+}
+
+/** \brief Horizontal wrap.
+
+    Enables wrapping to the next line while printing text (default on)
+*/
+void MicroOLED::textWrap(bool wrap) {
+	textWrapFlag = wrap;
 }
 
 void MicroOLED::spiSetup()
